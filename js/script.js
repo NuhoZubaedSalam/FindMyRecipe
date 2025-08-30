@@ -30,7 +30,7 @@ function displayData(meals) {
         const mealDiv = document.createElement('div');
         mealDiv.className = "place-items-center m-2 border-2 border-dashed rounded-xl"
         mealDiv.innerHTML = `
-            <img class="w-full h-60 md:h-80 object-cover rounded-2xl p-2" src="${meal?.strMealThumb}" alt="">
+            <img class="w-full md:h-80 object-cover rounded-2xl p-2" src="${meal?.strMealThumb}" alt="">
             <h1 class="text-[18px] md:text-[20px] font-semibold text-balance text-center">${meal?.strMeal}</h1>
             <p>Area: ${meal?.strArea}</p>
             <p class=pb-2>Category: ${meal?.strCategory}</p>
