@@ -2,7 +2,6 @@
 import { API_ACCESS } from "./config.js";
 
 // To improve code readability, we use constants for commonly used element IDs
-const title = document.getElementById('title');
 const searchBar = document.getElementById("search-bar");
 const searchButton = document.getElementById("search-button");
 const navBar = document.getElementById("navbar");
