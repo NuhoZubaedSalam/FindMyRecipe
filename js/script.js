@@ -123,12 +123,12 @@ const loadRecipes = (
                 // It displays a warning to the user through the 'displayMsg()' function
                 displayMsg("warning");
             // Otherwise, it displays the information contained in the 'meals' array
-            else displayData(data?.meals);
+            else displayAllMeals(data?.meals);
         });
 };
 
-// 'displayData()' is an arrow function with the 'meals' array as a parameter
-const displayData = (meals) => {
+// 'displayAllMeals()' is an arrow function with the 'meals' array as a parameter
+const displayAllMeals = (meals) => {
     // We create a div to store the user's requested meals
     const mealsContainer = document.createElement("div");
 
@@ -166,3 +166,13 @@ const displayData = (meals) => {
 };
 
 // **** LOAD SINGLE RECIPES ****
+
+const loadSingleRecipe = (mealID) => {
+    fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+        .then(response => response.json())
+        .then(data => displayRecipe(data))
+}
+
+const displayRecipe = (meal) => {
+    
+}
