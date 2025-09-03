@@ -34,7 +34,7 @@
         <title>FindMyRecipe</title>
     </head>
 
-    <body class="min-h-screen justify-center">
+    <body class="min-h-screen justify-center bg-[#FFF8E7] text-[#4D2A2D]">
         <!-- **** HEADER **** -->
         <header
             class="flex justify-between items-center py-4 md:py-5 md:text-[16px] lg:text-[18px] mx-4 md:mx-10 lg:mx-20 xl:mx-40 font-semibold"
@@ -49,19 +49,19 @@
             <!-- **** NAVBAR **** -->
             <nav class="max-[500px]:hidden flex justify-evenly" id="navbar">
                 <li
-                    class="mr-5 cursor-pointer hover:text-blue-500 hover:underline hover:underline-offset-2 list-none"
+                    class="mr-5 cursor-pointer transition hover:text-orange-500 hover:underline hover:underline-offset-2 list-none"
                     id="latest-meals"
                 >
                     Latest
                 </li>
                 <li
-                    class="mr-5 cursor-pointer hover:text-blue-500 hover:underline hover:underline-offset-2 list-none"
+                    class="mr-5 cursor-pointer transition hover:text-orange-500 hover:underline hover:underline-offset-2 list-none"
                     id="random-meal"
                 >
                     Random
                 </li>
                 <li
-                    class="cursor-pointer hover:text-blue-500 hover:underline hover:underline-offset-2 list-none"
+                    class="cursor-pointer transition hover:text-orange-500 hover:underline hover:underline-offset-2 list-none"
                     id="meal-selection"
                 >
                     Our selection
@@ -73,13 +73,13 @@
         <main>
             <div class="flex justify-center pt-1">
                 <input
-                    class="border-2 md:w-80 lg:w-100 rounded-md p-1 pl-2 cursor-text transition focus:ring-3 focus:ring-blue-600"
+                    class="border-2 md:w-80 lg:w-100 rounded-md p-1 pl-2 cursor-text transition focus:ring-4 focus:ring-orange-500"
                     type="text"
                     placeholder="Search your recipe"
                     id="search-bar"
                 />
                 <button
-                    class="ml-2 border-2 py-2 px-3 rounded-lg cursor-pointer bg-blue-600 border-black text-white font-semibold transition hover:bg-white hover:text-blue-600"
+                    class="ml-2 border-2 py-2 px-3 rounded-lg cursor-pointer bg-orange-500 border-black text-white font-semibold transition hover:bg-white hover:text-orange-500 hover:border-orange-500"
                     id="search-button"
                 >
                     Search

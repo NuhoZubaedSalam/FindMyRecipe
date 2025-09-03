@@ -148,7 +148,7 @@ const displayData = (meals) => {
         // We add an ID, the necessary TailwindCSS classes and a custom shadow to each meal div
         mealDiv.id = meal?.idMeal;
         mealDiv.className =
-            "place-items-center m-2 border-2 border-dashed rounded-xl transition hover:scale-105";
+            "bg-orange-200 place-items-center m-2 border-2 border-dashed border-[#7C3E1D] rounded-xl transition hover:scale-105 cursor-pointer";
         mealDiv.style.boxShadow =
             "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px";
 
