@@ -58,6 +58,8 @@ document.body.addEventListener("keydown", (event) => {
 title.addEventListener("click", () => {
     // If that is the case, we call the 'refreshPage()' function
     refreshPage();
+    // Erases whatever is written in the search bar
+    searchBar.value = '';
 });
 
 // We check if a click event was fired by the search button
@@ -72,9 +74,6 @@ const refreshPage = () => {
     // We remove all the HTML contained in the recipe and the result divs
     recipeDiv.innerHTML = "";
     resultDiv.innerHTML = "";
-
-    // Erases whatever is written in the search bar
-    searchBar.value = '';
 
     // We remove all the TailwindCSS classes from the recipe div
     recipeDiv.className = "";
