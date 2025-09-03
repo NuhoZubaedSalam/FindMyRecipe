@@ -58,8 +58,6 @@ document.body.addEventListener("keydown", (event) => {
 title.addEventListener("click", () => {
     // If that is the case, we call the 'refreshPage()' function
     refreshPage();
-    // Erases whatever is written in the search bar
-    searchBar.value = '';
 });
 
 // We check if a click event was fired by the search button
