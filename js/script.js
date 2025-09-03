@@ -55,15 +55,19 @@ document.body.addEventListener("keydown", (event) => {
 
 // We check if a click event was fired by the search button
 searchButton.addEventListener("click", () => {
-    // If that is the case, we refresh the result and recipes divs and we call the 'handleInput()' function
+    // If that is the case, we call the 'refreshPage()' and 'handleInput()' functions
     refreshPage();
     handleInput();
 });
 
+// 'refreshPage()' is an arrow function which clears the recipe and result divs 
 const refreshPage = () => {
+    // We remove all the HTML contained in the recipe and the result divs
     recipeDiv.innerHTML = "";
-    recipeDiv.className = "";
     resultDiv.innerHTML = "";
+
+    // We remove all the TailwindCSS classes from the recipe div
+    recipeDiv.className = "";
 };
 
 const handleInput = () => {
@@ -168,6 +172,7 @@ const displayAllMeals = (meals) => {
         `;
 
         // We add an event listener which checks if the user has clicked on a meal div
+        // If that is the case, we call the 'loadSingleRecipe()' function with the meal div's ID
         mealDiv.addEventListener("click", () => loadSingleRecipe(mealDiv.id));
 
         // We append each newly created div to the meal container
@@ -177,18 +182,26 @@ const displayAllMeals = (meals) => {
 
 // **** LOAD SINGLE RECIPES ****
 
+// 'loadSingleRecipe()' is an arrow function with the meal's ID as a parameter
 const loadSingleRecipe = (mealID) => {
+    // THe fetch function fetches the contents from the API based on the user's selected meals
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+        
+    // The data is passed to the 'displayRecipe()' function
         .then((response) => response.json())
         .then((data) => displayRecipe(data?.meals[0]));
 };
 
+// 'displayRecipe()' is an arrow function with the first element of 'meals' array as a parameter
 const displayRecipe = (meal) => {
+    // We retrieve the ingredientList from the 'retrieveIngredients()'
     const ingredientList = retrieveIngredients(meal);
 
+    // We apply the necessary classes to the recipe div
     recipeDiv.className =
         "border-3 border-[#7C3E1D] rounded-lg border-dotted mx-4 mt-5 p-2 lg:mx-40 md:w-100 justify-self-center";
 
+    // We add the necessary HTML elements with the required content to the recipe div
     recipeDiv.innerHTML = `
         <img class="w-full md:h-80 object-cover rounded-2xl" src="${meal?.strMealThumb}" alt="">
         <h1 class="text-[18px] md:text-[20px] font-semibold text-balance text-center py-2">${meal?.strMeal}</h1>
@@ -199,18 +212,29 @@ const displayRecipe = (meal) => {
         <p class="py-2"><b>Instructions:</b></p>
         <p class="whitespace-pre-line text-justify text-pretty">${meal?.strInstructions}</p>
     `;
+
+    // After the contents have been inserted, the recipe div scrolls smoothly into view 
+    // block: "start" ensures that the scrolls to the start of the recipe div
+    recipeDiv.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
+// 'displayRecipe()' is an arrow function with the parameter as 'displayRecipe()'
 const retrieveIngredients = (meal) => {
+    // We initialize an empty string to store the ingredient list
     let ingredientList = "";
 
+    // We loop through all 20 ingridients in each meal 
     for (let i = 1; i <= 20; i++) {
+        // For each meal, we access the current ingredient and measure
         let currentIngredient = meal[`strIngredient${i}`];
         let currentMeasure = meal[`strMeasure${i}`];
+
+        // if the current ingredient and measure are not empty when trimmed, we add them to the list
         if (currentIngredient.trim() !== "" && currentMeasure.trim() !== "") {
             ingredientList += `&bull; ${currentIngredient.trim()} <i>(${currentMeasure.trim()})</i> <br>`;
         }
     }
 
+    // At the end we return the ingridient list
     return ingredientList;
 };
