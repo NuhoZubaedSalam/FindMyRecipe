@@ -2,6 +2,7 @@
 import { API_ACCESS } from "./config.js";
 
 // To improve code readability, we use constants for commonly used element IDs
+const title = document.getElementById('title');
 const searchBar = document.getElementById("search-bar");
 const searchButton = document.getElementById("search-button");
 const navBar = document.getElementById("navbar");
@@ -51,6 +52,12 @@ document.body.addEventListener("keydown", (event) => {
         refreshPage();
         handleInput();
     }
+});
+
+// We check if a click event was fired by the title
+title.addEventListener("click", () => {
+    // If that is the case, we call the 'refreshPage()' and 'handleInput()' functions
+    refreshPage();
 });
 
 // We check if a click event was fired by the search button
