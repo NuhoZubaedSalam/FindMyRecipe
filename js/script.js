@@ -5,6 +5,7 @@ import { API_ACCESS } from "./config.js";
 const searchBar = document.getElementById("search-bar");
 const searchButton = document.getElementById("search-button");
 const navBar = document.getElementById("navbar");
+const recipeDiv = document.getElementById("single-meal");
 
 // We create a result div to store search results
 const resultDiv = document.createElement("div");
@@ -13,8 +14,8 @@ document.body.appendChild(resultDiv);
 // **** NAVBAR *****
 // We use event propagation to check if the user has clicked any of the links in the navbar
 navBar.addEventListener("click", (event) => {
-    // If that is the case, we refresh the result div
-    resultDiv.innerHTML = "";
+    // If that is the case, we refresh the result and the recipe div
+    refreshPage();
 
     // Based on the target's ID we call the 'loadRecipes()' function with no input
     // and the required API link as parameters
@@ -46,18 +47,24 @@ navBar.addEventListener("click", (event) => {
 document.body.addEventListener("keydown", (event) => {
     // We check if the event's code matches the enter key
     if (event.code === "Enter") {
-        // If that is the case, we refresh the result div and we call the 'handleInput()' function
-        resultDiv.innerHTML = "";
+        // If that is the case, we refresh the result and recipe divs and we call the 'handleInput()' function
+        refreshPage();
         handleInput();
     }
 });
 
 // We check if a click event was fired by the search button
 searchButton.addEventListener("click", () => {
-    // If that is the case, we refresh the result div and we call the 'handleInput()' function
-    resultDiv.innerHTML = "";
+    // If that is the case, we refresh the result and recipes divs and we call the 'handleInput()' function
+    refreshPage();
     handleInput();
 });
+
+const refreshPage = () => {
+    recipeDiv.innerHTML = "";
+    recipeDiv.className = "";
+    resultDiv.innerHTML = "";
+};
 
 const handleInput = () => {
     // We get the get user's input from the search bar
@@ -160,6 +167,9 @@ const displayAllMeals = (meals) => {
             <p class=pb-2><b><i>Category:</i></b> ${meal?.strCategory}</p>
         `;
 
+        // We add an event listener which checks if the user has clicked on a meal div
+        mealDiv.addEventListener("click", () => loadSingleRecipe(mealDiv.id));
+
         // We append each newly created div to the meal container
         mealsContainer.appendChild(mealDiv);
     });
@@ -168,11 +178,39 @@ const displayAllMeals = (meals) => {
 // **** LOAD SINGLE RECIPES ****
 
 const loadSingleRecipe = (mealID) => {
-    fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
-        .then(response => response.json())
-        .then(data => displayRecipe(data))
-}
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`)
+        .then((response) => response.json())
+        .then((data) => displayRecipe(data?.meals[0]));
+};
 
 const displayRecipe = (meal) => {
-    
-}
+    const ingredientList = retrieveIngredients(meal);
+
+    recipeDiv.className =
+        "border-3 border-[#7C3E1D] rounded-lg border-dotted mx-4 mt-5 p-2 lg:mx-40 md:w-100 justify-self-center";
+
+    recipeDiv.innerHTML = `
+        <img class="w-full md:h-80 object-cover rounded-2xl" src="${meal?.strMealThumb}" alt="">
+        <h1 class="text-[18px] md:text-[20px] font-semibold text-balance text-center py-2">${meal?.strMeal}</h1>
+        <p><b><i>Area:</i></b> ${meal?.strArea}</p>
+        <p class="pb-2"><b><i>Category:</i></b> ${meal?.strCategory}</p>
+        <p><b>Ingredients (measures):</b></p>
+        <p>${ingredientList}</p>
+        <p class="py-2"><b>Instructions:</b></p>
+        <p class="whitespace-pre-line text-justify text-pretty">${meal?.strInstructions}</p>
+    `;
+};
+
+const retrieveIngredients = (meal) => {
+    let ingredientList = "";
+
+    for (let i = 1; i <= 20; i++) {
+        let currentIngredient = meal[`strIngredient${i}`];
+        let currentMeasure = meal[`strMeasure${i}`];
+        if (currentIngredient.trim() !== "" && currentMeasure.trim() !== "") {
+            ingredientList += `&bull; ${currentIngredient.trim()} <i>(${currentMeasure.trim()})</i> <br>`;
+        }
+    }
+
+    return ingredientList;
+};
