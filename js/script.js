@@ -230,7 +230,7 @@ const retrieveIngredients = (meal) => {
         let currentMeasure = meal[`strMeasure${i}`];
 
         // if the current ingredient and measure are not empty when trimmed, we add them to the list
-        if (currentIngredient.trim() !== "" && currentMeasure.trim() !== "") {
+        if (currentIngredient && currentIngredient.trim() !== "" && currentMeasure && currentMeasure.trim() !== "") {
             ingredientList += `&bull; ${currentIngredient.trim()} <i>(${currentMeasure.trim()})</i> <br>`;
         }
     }
