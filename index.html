@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <!-- Favicon links -->
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -23,6 +24,7 @@
         />
         <link rel="manifest" href="./img/favicon_io/site.webmanifest" />
 
+        <!-- FontAwesome and TailwindCSS links -->
         <script
             src="https://kit.fontawesome.com/eeb9412f42.js"
             crossorigin="anonymous"
@@ -31,26 +33,64 @@
 
         <title>FindMyRecipe</title>
     </head>
-    <body class="min-h-screen">
-        <div class="flex justify-center pb-2">
-            <h1 class="text-[15px]">FindMyRecipe</h1>
-        </div>
 
-        <div class="flex justify-center pt-3">
-            <input
-                class="border-2 w-50 md:w-80 lg:w-100 rounded-md p-1 pl-2 cursor-text focus:ring-3 focus:ring-blue-600"
-                type="text"
-                placeholder="Search your recipe"
-                id="search-bar"
-            />
-            <button
-                class="ml-2 border-2 py-1 px-2 rounded-lg cursor-pointer bg-blue-600 border-black text-white font-semibold hover:bg-white hover:text-blue-600"
-                id="search-button"
-            >
-                Search
+    <body class="min-h-screen justify-center">
+        <!-- **** HEADER **** -->
+        <header
+            class="flex justify-between items-center py-4 md:py-5 md:text-[16px] lg:text-[18px] mx-4 md:mx-10 lg:mx-20 xl:mx-40 font-semibold"
+        >
+            <h1 class="text-xl">FindMyRecipe</h1>
+
+            <!-- **** HAMBURGER MENU FOR SMARTPHONES -->
+            <button class="min-[500px]:hidden text-xl" id="m-navbar">
+                <i class="fa-solid fa-bars"></i>
             </button>
-        </div>
 
-        <script src="./js/script.js"></script>
+            <!-- **** NAVBAR **** -->
+            <nav class="max-[500px]:hidden flex justify-evenly" id="navbar">
+                <li
+                    class="mr-5 cursor-pointer hover:text-blue-500 hover:underline hover:underline-offset-2 list-none"
+                    id="latest-meals"
+                >
+                    Latest
+                </li>
+                <li
+                    class="mr-5 cursor-pointer hover:text-blue-500 hover:underline hover:underline-offset-2 list-none"
+                    id="random-meal"
+                >
+                    Random
+                </li>
+                <li
+                    class="cursor-pointer hover:text-blue-500 hover:underline hover:underline-offset-2 list-none"
+                    id="meal-selection"
+                >
+                    Our selection
+                </li>
+            </nav>
+        </header>
+
+        <!-- **** MAIN CONTENT **** -->
+        <main>
+            <div class="flex justify-center pt-1">
+                <input
+                    class="border-2 md:w-80 lg:w-100 rounded-md p-1 pl-2 cursor-text transition focus:ring-3 focus:ring-blue-600"
+                    type="text"
+                    placeholder="Search your recipe"
+                    id="search-bar"
+                />
+                <button
+                    class="ml-2 border-2 py-2 px-3 rounded-lg cursor-pointer bg-blue-600 border-black text-white font-semibold transition hover:bg-white hover:text-blue-600"
+                    id="search-button"
+                >
+                    Search
+                </button>
+            </div>
+        </main>
+
+        <script>
+            const mNavbar = document.getElementById('m-navbar');
+
+        </script>
+        <script type="module" src="./js/script.js"></script>
     </body>
 </html>
