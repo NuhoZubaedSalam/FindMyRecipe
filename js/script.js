@@ -54,12 +54,6 @@ document.body.addEventListener("keydown", (event) => {
     }
 });
 
-// We check if a click event was fired by the title
-title.addEventListener("click", () => {
-    // If that is the case, we call the 'refreshPage()' function
-    refreshPage();
-});
-
 // We check if a click event was fired by the search button
 searchButton.addEventListener("click", () => {
     // If that is the case, we call the 'refreshPage()' and 'handleInput()' functions
